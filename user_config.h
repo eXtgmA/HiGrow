@@ -26,6 +26,8 @@
 #define MQTT_PORT               1883                  // [MQTT] MQTT Port on the Server
 #define MQTT_TOPIC              "smart/room/flower"   // [MQTT] Set the topic for your queue
 #define MQTT_INTERVAL           3600                  // [MQTT] Set the deepsleep time in seconds
+#define MQTT_USER                "username"           // [MQTT] Set a Username
+#define MQTT_PASSWORD            "***"                // [MQTT] Set a password
 
 
 // -- HTTP ---------------------------------------------- When webser is activ deepsleep will be disabled
