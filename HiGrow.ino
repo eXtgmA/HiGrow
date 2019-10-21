@@ -160,14 +160,24 @@ void loop() {
 void mqttconnect() {
   while (!client.connected()) {                   // Try to connect to MQTT
     Serial.print("MQTT connecting...");
-    if (client.connect(CLIENT)) {                 // Connect
-      Serial.println("connected");
+    if (MQTT_USER) {      // MQTT User is set?
+      if (client.connect(CLIENT, MQTT_USER, MQTT_PASSWORD)) {         // Connect
+        Serial.println("connected");
+      } else {
+        Serial.print("failed, status code =");
+        Serial.print(client.state());
+        Serial.println("try again in 5 seconds");
+        delay(5000);                                // Wait 5 seconds before retrying
+      }
     } else {
-      Serial.print("failed, status code =");
-      Serial.print(client.state());
-      Serial.println("try again in 5 seconds");
-      delay(5000);                                // Wait 5 seconds before retrying
-    }
+      if (client.connect(CLIENT)) {         // Connect
+        Serial.println("connected");
+      } else {
+        Serial.print("failed, status code =");
+        Serial.print(client.state());
+        Serial.println("try again in 5 seconds");
+        delay(5000);                                // Wait 5 seconds before retrying
+      }
   }
 }
 
